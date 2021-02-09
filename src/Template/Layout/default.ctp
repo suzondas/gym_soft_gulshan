@@ -73,6 +73,30 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
       <div class="control-sidebar-bg"></div>
     </div>
+    <script>
+        $('.datepicker').datepicker({
+            format:'dd/mm/yyyy'
+        });
 
+        $('#SearchingCatergory').on('change', function() {
+            console.log( this.value);
+            if ( this.value == 'specific')
+            {
+                $(".date-area-specific").show();
+                $(".date-area-range").hide();
+
+            }
+            else if ( this.value == 'range')
+            {
+                $(".date-area-range").show();
+                $(".date-area-specific").hide();
+
+            }else{
+                $(".date-area-range").hide();
+                $(".date-area-specific").hide();
+            }
+        });
+
+    </script>
 </body>
 </html>

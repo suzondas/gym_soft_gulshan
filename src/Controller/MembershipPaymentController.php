@@ -6,7 +6,8 @@ use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Gmgt_paypal_class;
 use Cake\Datasource\ConnectionManager;
-
+use Cake\I18n\Time;
+use Cake\I18n\Date;
 
 class MembershipPaymentController extends AppController
 {
@@ -66,6 +67,7 @@ class MembershipPaymentController extends AppController
             return $this->redirect(["action" => "paymentList"]);
         }
     }
+
     public function addCustomMember()
     {
         if ($this->request->is('post')) {
@@ -90,6 +92,37 @@ class MembershipPaymentController extends AppController
         }
 
     }
+
+    public function incomeReport()
+    {
+        if ($this->request->is('post')) {
+
+            if ($this->request->data["SearchingCatergory"] == 'today') {
+                $today = new Time('today');
+                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income", "invoice_date" => $today])->hydrate(false)->toArray();
+//                var_dump($data);exit;
+                $this->set("data", $data);
+            }
+            if ($this->request->data["SearchingCatergory"] == 'specific') {
+                $date = new Date($this->request->data['startDateSpecific']);
+                $specificDate = $date->format('Y-m-d');
+                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income", "invoice_date" => $specificDate])->hydrate(false)->toArray();
+                $this->set("data", $data);
+            }
+            if ($this->request->data["SearchingCatergory"] == 'range') {
+                $sDate = new Date($this->request->data['startDateRange']);
+                $startDateRange = $sDate->format('Y-m-d');
+
+                $eDate = new Date($this->request->data['endDateRange']);
+                $endDateRange = $eDate->format('Y-m-d');
+
+                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income", "invoice_date >=" => $startDateRange, "invoice_date <=" => $endDateRange])->hydrate(false)->toArray();
+                $this->set("data", $data);
+            }
+        }
+
+    }
+
     public function generatePaymentInvoice()
     {
         $this->set("edit", false);
@@ -425,7 +458,7 @@ class MembershipPaymentController extends AppController
         $role_name = $user["role_name"];
         $curr_action = $this->request->action;
         $members_actions = ["paymentList", "paymentSuccess", "ipnFunction"];
-        $staff_actions = ["paymentList", "addIncome","addCustomMember", "incomeList", "expenseList", "addExpense", "incomeEdit", "expenseEdit"];
+        $staff_actions = ["paymentList", "addIncome", "addCustomMember", "incomeReport", "incomeList", "expenseList", "addExpense", "incomeEdit", "expenseEdit"];
         $acc_actions = ["paymentList", "addIncome", "incomeList", "expenseList", "addExpense", "incomeEdit", "expenseEdit", "printInvoice", "deleteIncome"];
         switch ($role_name) {
             CASE "member":

@@ -26,9 +26,15 @@ $(document).ready(function() {
 					<?php echo __("Income List");?>
 					<small><?php echo __("Income");?></small>
 				</h1>
-				<ol class="breadcrumb">
+                <br>
+                <div class="row">
+				<div class="col-md-3">
 					<a href="<?php echo $this->Gym->createurl("MembershipPayment","addIncome");?>" class="btn btn-flat btn-custom"><i class="fa fa-plus"></i> <?php echo __("Add Income");?></a>
-				</ol>
+				</div>
+                    <div class="col-md-3">
+                    <a href="<?php echo $this->Gym->createurl("MembershipPayment","incomeReport");?>" class="btn btn-flat btn-custom"><i class="fa fa-plus"></i> <?php echo __("Income Report");?></a>
+                </ol>
+                </div>
 			</section>
 		</div>
 		<hr>
