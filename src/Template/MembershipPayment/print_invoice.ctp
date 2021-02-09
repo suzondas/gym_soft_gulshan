@@ -9,10 +9,10 @@
 					<table width="100%" border="0">
 						<tbody>
 							<tr>
-								<td width="70%">
+								<td width="50%%">
 									<img style="max-height:80px;" src="<?php echo $sys_data["gym_logo"]; ?>">
 								</td>
-								<td align="right" width="24%">
+								<td align="right" width="50%">
 									<h5><?php $issue_date='DD-MM-YYYY';
 												if(!empty($income_data)){
 													$issue_date=$income_data["invoice_date"]->format("Y-m-d");
@@ -79,7 +79,7 @@
 								<th class="text-center"> <?php echo __('Date');?></th>
 								<th width="60%"><?php echo __('Entry');?> </th>
 								<th><?php echo __('Price');?></th>
-								<th class="text-center"> <?php echo __('Username');?> </th>
+								<th class="text-center"> <?php echo __('Received By');?> </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -98,7 +98,8 @@
 									<td class="text-center"><?php echo $income_data["invoice_date"];?></td>
 									<td class="text-center"><?php echo $entry->entry;?></td>
 									<td class="text-center"><?php echo $this->Gym->get_currency_symbol();?> <?php echo $entry->amount;?></td>
-									<td class="text-center"><?php echo $income_data["gym_member"]["first_name"] . " ". $income_data["gym_member"]["first_name"];?></td>
+<!--									<td class="text-center">--><?php //echo $income_data["gym_member"]["first_name"] . " ". $income_data["gym_member"]["first_name"];?><!--</td>-->
+									<td class="text-center"><?php echo $income_data["receiver_name"]["first_name"] . " ". $income_data["receiver_name"]["last_name"];?></td>
 									</tr>
 								<?php	$i++;
 								}							

@@ -59,7 +59,8 @@ $(document).ready(function() {
 								<td>". $this->Gym->get_currency_symbol() ." {$row['total_amount']}</td>
 								<td>".date($this->Gym->getSettings("date_format"),strtotime($row["invoice_date"]))."</td>
 								<td>
-								<a href='javascript:void(0)' class='btn btn-flat btn-info view_income_expense' data-url='".$this->request->base ."/GymAjax/viewIncomeExpense/{$row['id']}' type='income'><i class='fa fa-eye'></i></a>
+								
+								<a target='_blank' href='".$this->request->base ."/MembershipPayment/printInvoice/{$row['id']}/income' class='btn btn-flat btn-info' title='Invoice'><i class='fa fa-eye'></i></a>
 								<a href='".$this->request->base ."/MembershipPayment/incomeEdit/{$row['id']}' class='btn btn-flat btn-primary' title='Edit'><i class='fa fa-edit'></i></a>
 								<a href='".$this->request->base ."/MembershipPayment/deleteIncome/{$row['id']}' class='btn btn-flat btn-danger' onclick=\"return confirm('Are you sure,You want to delete this record?')\"><i class='fa fa-trash'></i></a>
 								</td>
@@ -68,6 +69,7 @@ $(document).ready(function() {
 				}
 				?>
 			</tbody>
+<!--             <a href='javascript:void(0)' class='btn btn-flat btn-info view_income_expense' data-url='".$this->request->base ."/GymAjax/viewIncomeExpense/{$row['id']}' type='income'><i class='fa fa-eye'></i></a>-->
 			<tfoot>
             <tr>
 				<th><?php  echo __( 'Member Name', 'gym_mgt' ) ;?></th>

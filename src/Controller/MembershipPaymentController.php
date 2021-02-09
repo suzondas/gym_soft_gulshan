@@ -99,14 +99,14 @@ class MembershipPaymentController extends AppController
 
             if ($this->request->data["SearchingCatergory"] == 'today') {
                 $today = new Time('today');
-                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income", "invoice_date" => $today])->hydrate(false)->toArray();
+                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName","receiverName"])->where(["invoice_type" => "income", "invoice_date" => $today])->hydrate(false)->toArray();
 //                var_dump($data);exit;
                 $this->set("data", $data);
             }
             if ($this->request->data["SearchingCatergory"] == 'specific') {
                 $date = new Date($this->request->data['startDateSpecific']);
                 $specificDate = $date->format('Y-m-d');
-                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income", "invoice_date" => $specificDate])->hydrate(false)->toArray();
+                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName","receiverName"])->where(["invoice_type" => "income", "invoice_date" => $specificDate])->hydrate(false)->toArray();
                 $this->set("data", $data);
             }
             if ($this->request->data["SearchingCatergory"] == 'range') {
@@ -116,7 +116,7 @@ class MembershipPaymentController extends AppController
                 $eDate = new Date($this->request->data['endDateRange']);
                 $endDateRange = $eDate->format('Y-m-d');
 
-                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income", "invoice_date >=" => $startDateRange, "invoice_date <=" => $endDateRange])->hydrate(false)->toArray();
+                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName","receiverName"])->where(["invoice_type" => "income", "invoice_date >=" => $startDateRange, "invoice_date <=" => $endDateRange])->hydrate(false)->toArray();
                 $this->set("data", $data);
             }
         }
@@ -321,7 +321,8 @@ class MembershipPaymentController extends AppController
         $sys_data = $setting_tbl->find()->select(["name", "address", "gym_logo", "date_format", "office_number", "country"])->hydrate(false)->toArray();
 
         if ($invoice_type == "income") {
-            $income_data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["GymIncomeExpense.id" => $id])->hydrate(false)->toArray();
+            $income_data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember","receiverName"])->where(["GymIncomeExpense.id" => $id])->hydrate(false)->toArray();
+//            var_dump($income_data);exit;
             $this->set("income_data", $income_data[0]);
             $this->set("expense_data", $expense_data);
             $this->set("invoice_data", $invoice_data);

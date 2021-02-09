@@ -54,6 +54,7 @@
                 <tr>
                     <th>Sl</th>
                     <th>Customer Name</th>
+                    <th>Receiver Name</th>
                     <th>Invoice Label</th>
                     <th>Amount</th>
                 </tr>
@@ -66,7 +67,8 @@
                     echo "<td>";
                     echo $i + 1;
                     echo "</td>";
-                    echo "<td>" . $data[$i]["gym_member"]["first_name"] . " " . $data[$i]["gym_member"]["first_name"] . "</td>";
+                    echo "<td>" . $data[$i]["supplier_name"]["first_name"] . " " . $data[$i]["supplier_name"]["last_name"] ."-".$data[$i]["supplier_name"]["member_id"]. "</td>";
+                    echo "<td>" . $data[$i]["receiver_name"]["first_name"] . " " . $data[$i]["receiver_name"]["last_name"] ."-".$data[$i]["receiver_name"]["member_id"]. "</td>";
                     echo "<td>" . $data[$i]["invoice_label"] . "</td>";
                     echo "<td>" . $data[$i]["total_amount"] . "</td>";
                     $totalIncome += $data[$i]["total_amount"];
@@ -74,8 +76,9 @@
                 } ?>
                 </tbody>
                 <tfoot>
-                <tr>
+                <tr style="font-weight: bold;">
                     <td>Total</td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td><?= $totalIncome ?></td>
