@@ -27,7 +27,7 @@ class MembershipPaymentController extends AppController
         } else {
             $data = $this->MembershipPayment->find("all")->contain(["Membership", "GymMember"])->hydrate(false)->toArray();
         }
-//		var_dump($data);exit;
+//    var_dump($data);exit;
         $this->set("data", $data);
 
         if ($this->request->is("post")) {
@@ -95,18 +95,31 @@ class MembershipPaymentController extends AppController
 
     public function incomeReport()
     {
-        if ($this->request->is('post')) {
+        $this->set("edit", false);
+        $members = $this->MembershipPayment->GymMember->find("list", ["keyField" => "id", "valueField" => "name"])->where(["role_name !=" => "member"]);
+        $members = $members->select(["id", "name" => $members->func()->concat(["first_name" => "literal", " ", "last_name" => "literal"])])->hydrate(false)->toArray();
+        $members['all'] = 'All';
+        $this->set("members", $members);
 
+        if ($this->request->is('post')) {
             if ($this->request->data["SearchingCatergory"] == 'today') {
                 $today = new Time('today');
-                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName","receiverName"])->where(["invoice_type" => "income", "invoice_date" => $today])->hydrate(false)->toArray();
-//                var_dump($data);exit;
+                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName", "receiverName"])->where(["invoice_type" => "income", "invoice_date" => $today])->hydrate(false)->toArray();
+                if ($this->request->data['receiver_id'] != 'all') {
+                    $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName", "receiverName"])->where(["invoice_type" => "income", "invoice_date" => $today, 'receiver_id' => $this->request->data['receiver_id']])->hydrate(false)->toArray();
+                } else {
+                    $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName", "receiverName"])->where(["invoice_type" => "income", "invoice_date" => $today])->hydrate(false)->toArray();
+                }
                 $this->set("data", $data);
             }
             if ($this->request->data["SearchingCatergory"] == 'specific') {
                 $date = new Date($this->request->data['startDateSpecific']);
                 $specificDate = $date->format('Y-m-d');
-                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName","receiverName"])->where(["invoice_type" => "income", "invoice_date" => $specificDate])->hydrate(false)->toArray();
+                if ($this->request->data['receiver_id'] != 'all') {
+                    $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName", "receiverName"])->where(["invoice_type" => "income", "invoice_date" => $specificDate, 'receiver_id' => $this->request->data['receiver_id']])->hydrate(false)->toArray();
+                } else {
+                    $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName", "receiverName"])->where(["invoice_type" => "income", "invoice_date" => $specificDate])->hydrate(false)->toArray();
+                }
                 $this->set("data", $data);
             }
             if ($this->request->data["SearchingCatergory"] == 'range') {
@@ -115,8 +128,12 @@ class MembershipPaymentController extends AppController
 
                 $eDate = new Date($this->request->data['endDateRange']);
                 $endDateRange = $eDate->format('Y-m-d');
-
-                $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName","receiverName"])->where(["invoice_type" => "income", "invoice_date >=" => $startDateRange, "invoice_date <=" => $endDateRange])->hydrate(false)->toArray();
+                if ($this->request->data['receiver_id'] != 'all') {
+                    $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName", "receiverName"])->where(["invoice_type" => "income", "invoice_date >=" => $startDateRange, "invoice_date <=" => $endDateRange, 'receiver_id' => $this->request->data['receiver_id']])->hydrate(false)->toArray();
+                } else {
+                    $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["supplierName", "receiverName"])->where(["invoice_type" => "income", "invoice_date >=" => $startDateRange, "invoice_date <=" => $endDateRange])->hydrate(false)->toArray();
+                }
+//                var_dump($data);exit;
                 $this->set("data", $data);
             }
         }
@@ -225,6 +242,7 @@ class MembershipPaymentController extends AppController
     public function incomeList()
     {
         $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income"])->hydrate(false)->toArray();
+//        var_dump($data);exit;
         $this->set("data", $data);
     }
 
@@ -243,12 +261,15 @@ class MembershipPaymentController extends AppController
             foreach ($data["income_amount"] as $amount) {
                 $total_amount += $amount;
             }
-            $data["total_amount"] = $total_amount;
-            $data["entry"] = $this->get_entry_records($data);
-            $data["receiver_id"] = $session["id"];//current userid;
-            $data["invoice_date"] = date("Y-m-d", strtotime($data["invoice_date"]));
-            $row = $this->MembershipPayment->GymIncomeExpense->patchEntity($row, $data);
-            if ($this->MembershipPayment->GymIncomeExpense->save($row)) {
+            $row->total_amount = $total_amount;
+            $row->supplier_name = $this->request->data['supplier_name'];
+            $row->entry = $this->get_entry_records($data);
+            $row->receiver_id = $session["id"];
+            $row->invoice_type ='income';
+            $row->payment_status =$this->request->data['payment_status'];
+            $row->invoice_label = $this->request->data['invoice_label'];
+            $row->invoice_date = date("Y-m-d", strtotime($data["invoice_date"]));
+            if ( $this->MembershipPayment->GymIncomeExpense->save($row)) {
                 $this->Flash->success(__("Success! Record Saved Successfully."));
                 return $this->redirect(["action" => "incomeList"]);
             }
@@ -281,6 +302,7 @@ class MembershipPaymentController extends AppController
         $this->set("data", $row->toArray());
 
         if ($this->request->is("post")) {
+//            var_dump($row);exit;
             $data = $this->request->data;
             $total_amount = null;
             foreach ($data["income_amount"] as $amount) {
@@ -321,7 +343,7 @@ class MembershipPaymentController extends AppController
         $sys_data = $setting_tbl->find()->select(["name", "address", "gym_logo", "date_format", "office_number", "country"])->hydrate(false)->toArray();
 
         if ($invoice_type == "income") {
-            $income_data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember","receiverName"])->where(["GymIncomeExpense.id" => $id])->hydrate(false)->toArray();
+            $income_data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember", "receiverName"])->where(["GymIncomeExpense.id" => $id])->hydrate(false)->toArray();
 //            var_dump($income_data);exit;
             $this->set("income_data", $income_data[0]);
             $this->set("expense_data", $expense_data);
@@ -440,7 +462,7 @@ class MembershipPaymentController extends AppController
             $feedata['payment_method'] = 'Paypal';
             $feedata['trasaction_id'] = $trasaction_id;
             $feedata['created_by'] = $custom_array[0];
-            //$log_array		= print_r($feedata, TRUE);
+            //$log_array      = print_r($feedata, TRUE);
             //wp_mail( 'bhaskar@dasinfomedia.com', 'gympaypal', $log_array);
             $row = $this->MembershipPayment->MembershipPaymentHistory->newEntity();
             $row = $this->MembershipPayment->MembershipPaymentHistory->patchEntity($row, $feedata);
@@ -489,3 +511,4 @@ class MembershipPaymentController extends AppController
         return parent::isAuthorized($user);
     }
 }
+

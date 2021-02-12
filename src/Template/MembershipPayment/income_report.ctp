@@ -16,7 +16,7 @@
         <div class="container">
             <form class="form-group" action="income-report" method="post">
                 <label>Select Type:</label>
-                <select class="form-control" style="width:300px" name="SearchingCatergory" id="SearchingCatergory">
+                <select class="form-control" style="width:300px" name="SearchingCatergory" id="SearchingCatergory" required>
                     <option>Select</option>
                     <option value="today">Today</option>
                     <option value="specific">Specific</option>
@@ -38,6 +38,13 @@
                     <div class="col-md-4">
                         Select End Date:<br>
                         <input class="form-control datepicker" name="endDateRange"/>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <div class="container">
+                       <?php echo __("Select Receiver:"); ?><br>
+                            <?php echo $this->Form->select("receiver_id", $members, ["default" => ($edit) ? $data["supplier_name"] : "", "empty" => __("Select Receiver"), "class" => "mem_list form-control", "style"=>"width:auto;", "required" => "true"]) ?>
                     </div>
                 </div>
                 <br>
@@ -67,8 +74,8 @@
                     echo "<td>";
                     echo $i + 1;
                     echo "</td>";
-                    echo "<td>" . $data[$i]["supplier_name"]["first_name"] . " " . $data[$i]["supplier_name"]["last_name"] ."-".$data[$i]["supplier_name"]["member_id"]. "</td>";
-                    echo "<td>" . $data[$i]["receiver_name"]["first_name"] . " " . $data[$i]["receiver_name"]["last_name"] ."-".$data[$i]["receiver_name"]["member_id"]. "</td>";
+                    echo "<td>" . $data[$i]["supplier_name"]["first_name"] . " " . $data[$i]["supplier_name"]["last_name"] . "-" . $data[$i]["supplier_name"]["member_id"] . "</td>";
+                    echo "<td>" . $data[$i]["receiver_name"]["first_name"] . " " . $data[$i]["receiver_name"]["last_name"] . "-" . $data[$i]["receiver_name"]["member_id"] . "</td>";
                     echo "<td>" . $data[$i]["invoice_label"] . "</td>";
                     echo "<td>" . $data[$i]["total_amount"] . "</td>";
                     $totalIncome += $data[$i]["total_amount"];

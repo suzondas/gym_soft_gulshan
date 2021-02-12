@@ -31,5 +31,5 @@ if(mysqli_num_rows($Select_query) > 0){
 	$result['error']='Record not found';
 	$result['result']=array();
 }
-echo json_encode($result);*/
+echo json_encode($result);
 ?>

@@ -57,7 +57,7 @@ echo $this->Html->script('select2.min');
                                 class="text-danger">*</span></label>
                     <div class="col-sm-8">
                         <?php
-                        $status = ["Paid" => __("Paid"), "Partial Paid" => __("Partial Paid"), "Unpaid" => __("Unpaid")];
+                        $status = ["Paid" => __("Paid"), "Part Paid" => __("Part Paid"), "Unpaid" => __("Unpaid")];
                         echo $this->Form->select("payment_status", $status, ["default" => ($edit) ? $data["payment_status"] : "", "empty" => __("Select Status"), "class" => "form-control"]);
                         ?>
                     </div>
