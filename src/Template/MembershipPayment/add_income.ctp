@@ -39,7 +39,11 @@ echo $this->Html->script('select2.min');
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Add New Member: </label>
-                    <div class="col-sm-8"><a href="add_custom_member"><input type="button" value="Add Member"/></a>
+                    <!--                    <div class="col-sm-8"><a href="add_custom_member"><input type="button" value="Add Member"/></a>-->
+                    <div class="col-sm-8">
+                        <a href="<?php echo $this->Url->build(["controller" => "gymMember", "action" => "addMember", "gulshan",]); ?>"
+                           class="btn btn-flat btn-custom"><i class="fa fa-plus"></i> <?php echo __("Add Member"); ?>
+                        </a>
                     </div>
                 </div>
                 <div class="form-group">

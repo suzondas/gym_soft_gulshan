@@ -265,11 +265,11 @@ class MembershipPaymentController extends AppController
             $row->supplier_name = $this->request->data['supplier_name'];
             $row->entry = $this->get_entry_records($data);
             $row->receiver_id = $session["id"];
-            $row->invoice_type ='income';
-            $row->payment_status =$this->request->data['payment_status'];
+            $row->invoice_type = 'income';
+            $row->payment_status = $this->request->data['payment_status'];
             $row->invoice_label = $this->request->data['invoice_label'];
             $row->invoice_date = date("Y-m-d", strtotime($data["invoice_date"]));
-            if ( $this->MembershipPayment->GymIncomeExpense->save($row)) {
+            if ($this->MembershipPayment->GymIncomeExpense->save($row)) {
                 $this->Flash->success(__("Success! Record Saved Successfully."));
                 return $this->redirect(["action" => "incomeList"]);
             }
@@ -344,8 +344,11 @@ class MembershipPaymentController extends AppController
 
         if ($invoice_type == "income") {
             $income_data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember", "receiverName"])->where(["GymIncomeExpense.id" => $id])->hydrate(false)->toArray();
-//            var_dump($income_data);exit;
+
+            $membership_data = $this->MembershipPayment->MembershipPayment->find("all")->where(["member_id" => $income_data[0]["supplier_name"]])->hydrate(false)->toArray();
+//            var_dump($membership_data);exit;
             $this->set("income_data", $income_data[0]);
+            $this->set("membership_data", $membership_data[0]);
             $this->set("expense_data", $expense_data);
             $this->set("invoice_data", $invoice_data);
         } else if ($invoice_type == "expense") {

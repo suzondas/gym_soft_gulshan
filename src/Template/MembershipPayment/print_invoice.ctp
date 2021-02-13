@@ -1,7 +1,21 @@
 <script>window.onload = function () {
         window.print();
     };</script>
+<style>
+    .table-bordered {
+        border: 1px solid black;
+    }
 
+    .table-bordered td {
+        border: 1px solid black;
+
+    }
+
+    .table-bordered tr {
+        border: 1px solid black;
+
+    }
+</style>
 <div class="modal-body">
     <div id="invoice_print" style="width: 90%;margin:0 auto;">
         <div class="modal-header">
@@ -81,7 +95,7 @@
                 <!--<th class="text-center">#</th>-->
                 <th class="text-center"> <?php echo __('Date'); ?></th>
                 <th width="60%"><?php echo __('Entry'); ?> </th>
-                <th><?php echo __('Price'); ?></th>
+                <th><?php echo __('Now Paid'); ?></th>
                 <th class="text-center"> <?php echo __('Received By'); ?> </th>
             </tr>
             </thead>
@@ -138,45 +152,81 @@
             </tbody>
         </table>
         <table width="100%" border="0">
-            <tbody>
-            <?php if (!empty($invoice_data)) {
-                $total_amount = $invoice_data->total_amount;
-                $grand_total = $invoice_data->total_amount - $invoice_data->discount;
+            <table width="100%" border="0" class="table table-bordered">
+                <tbody>
+                <?php if (!empty($invoice_data)) {
+                    $total_amount = $invoice_data->total_amount;
+                    $grand_total = $invoice_data->total_amount - $invoice_data->discount;
+                    ?>
+                    <tr>
+                        <td width="80%" align="right"><?php echo __('Subtotal :'); ?></td>
+                        <td align="right"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $total_amount; ?></td>
+                    </tr>
+                    <tr>
+                        <td width="80%" align="right"><?php echo __('Discount :'); ?></td>
+                        <td align="right"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $invoice_data->discount; ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr style="margin:0px;">
+                        </td>
+                    </tr>
+                    <?php
+                }
+                if (!empty($income_data)) {
+                    $grand_total = $income_data["total_amount"];
+                } else if (!empty($expense_data)) {
+                    $grand_total = $expense_data["total_amount"];
+                }
                 ?>
                 <tr>
-                    <td width="80%" align="right"><?php echo __('Subtotal :'); ?></td>
-                    <td align="right"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $total_amount; ?></td>
+                    <td><?php echo __('Now Total Paid:'); ?></td>
+                    <td><h4
+                                style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total; ?></h4>
+
+                    </td>
+                    <td>In Words:</td>
+                    <td><i><?php
+                            $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+                            echo $f->format($grand_total);
+                            ?> Taka</i></td>
                 </tr>
                 <tr>
-                    <td width="80%" align="right"><?php echo __('Discount :'); ?></td>
-                    <td align="right"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $invoice_data->discount; ?></td>
+                    <td>Discounted Membership Amount</td>
+                    <td><i>
+                            <?php
+                            echo $membership_data["discount_amount"];
+                            ?> Taka</i></td>
+                    <td>Previously Paid</td>
+                    <td><i>
+                            <?php
+                            echo $membership_data["paid_amount"];
+                            ?> Taka</i></td>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <hr style="margin:0px;">
+                    <td>Due Amount</td>
+                    <td><i>
+                            <?php
+                            echo $membership_data["discount_amount"] - ($membership_data["paid_amount"] + $grand_total);
+                            ?> Taka</i></td>
+                    <td>Status</td>
+                    <td>
+                        <?php
+                        $due = $membership_data["discount_amount"] - ($membership_data["paid_amount"] + $grand_total);
+                        $paid_amount = ($membership_data["paid_amount"] + $grand_total);
+                        if ($paid_amount >= $membership_data["discount_amount"])
+                            echo 'Fully Paid';
+                        elseif ($paid_amount == 0)
+                            echo 'Not Paid';
+                        else
+                            echo 'Partially Paid';
+                        ?>
+
                     </td>
                 </tr>
-                <?php
-            }
-            if (!empty($income_data)) {
-                $grand_total = $income_data["total_amount"];
-            } else if (!empty($expense_data)) {
-                $grand_total = $expense_data["total_amount"];
-            }
-            ?>
-            <tr>
-                <td width="80%" align="right"><?php echo __('Grand Total :'); ?></td>
-                <td align="right"><h4
-                            style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total; ?></h4>
-                </td>
-            </tr>
-            <tr><td align="right" width="80%">In Words:</td>
-                <td>  <i><?php
-                        $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-                        echo $f->format($grand_total);
-                        ?> Taka</i></td></tr>
-            </tbody>
-        </table>
+
+                </tbody>
+            </table>
     </div>
 </div>
 <div class="" style="margin-top:35px;border-top:1px dotted black;width:100%"></div>
@@ -259,7 +309,7 @@
                 <!--<th class="text-center">#</th>-->
                 <th class="text-center"> <?php echo __('Date'); ?></th>
                 <th width="60%"><?php echo __('Entry'); ?> </th>
-                <th><?php echo __('Price'); ?></th>
+                <th><?php echo __('Now Paid'); ?></th>
                 <th class="text-center"> <?php echo __('Received By'); ?> </th>
             </tr>
             </thead>
@@ -315,7 +365,7 @@
             <?php } ?>
             </tbody>
         </table>
-        <table width="100%" border="0">
+        <table width="100%" border="0" class="table table-bordered">
             <tbody>
             <?php if (!empty($invoice_data)) {
                 $total_amount = $invoice_data->total_amount;
@@ -343,17 +393,50 @@
             }
             ?>
             <tr>
-                <td width="80%" align="right"><?php echo __('Grand Total :'); ?></td>
-                <td align="right"><h4
+                <td><?php echo __('Now Total Paid:'); ?></td>
+                <td><h4
                             style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total; ?></h4>
 
                 </td>
+                <td>In Words:</td>
+                <td><i><?php
+                        $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+                        echo $f->format($grand_total);
+                        ?> Taka</i></td>
             </tr>
-            <tr><td align="right" width="80%">In Words:</td>
-            <td>  <i><?php
-                    $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
-                    echo $f->format($grand_total);
-                    ?> Taka</i></td></tr>
+            <tr>
+                <td>Discounted Membership Amount</td>
+                <td><i>
+                        <?php
+                        echo $membership_data["discount_amount"];
+                        ?> Taka</i></td>
+                <td>Previously Paid</td>
+                <td><i>
+                        <?php
+                        echo $membership_data["paid_amount"];
+                        ?> Taka</i></td>
+            </tr>
+            <tr>
+                <td>Due Amount</td>
+                <td><i>
+                        <?php
+                        echo $membership_data["discount_amount"] - ($membership_data["paid_amount"] + $grand_total);
+                        ?> Taka</i></td>
+                <td>Status</td>
+                <td>
+                    <?php
+                    $due = $membership_data["discount_amount"] - ($membership_data["paid_amount"] + $grand_total);
+                    $paid_amount = ($membership_data["paid_amount"] + $grand_total);
+                    if ($paid_amount >= $membership_data["discount_amount"])
+                        echo 'Fully Paid';
+                    elseif ($paid_amount == 0)
+                        echo 'Not Paid';
+                    else
+                        echo 'Partially Paid';
+                    ?>
+
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
