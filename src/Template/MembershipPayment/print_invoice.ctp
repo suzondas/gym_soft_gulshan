@@ -180,7 +180,7 @@
                 }
                 ?>
                 <tr>
-                    <td><?php echo __('Now Total Paid:'); ?></td>
+                    <td><?php echo __('Now Paid:'); ?></td>
                     <td><h4
                                 style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total; ?></h4>
 
@@ -191,37 +191,16 @@
                             echo $f->format($grand_total);
                             ?> Taka</i></td>
                 </tr>
-                <tr>
-                    <td>Discounted Membership Amount</td>
-                    <td><i>
-                            <?php
-                            echo $membership_data["discount_amount"];
-                            ?> Taka</i></td>
-                    <td>Previously Paid</td>
-                    <td><i>
-                            <?php
-                            echo $membership_data["paid_amount"];
-                            ?> Taka</i></td>
-                </tr>
+
                 <tr>
                     <td>Due Amount</td>
                     <td><i>
                             <?php
-                            echo $membership_data["discount_amount"] - ($membership_data["paid_amount"] + $grand_total);
+                            echo $income_data["due_amount"];
                             ?> Taka</i></td>
-                    <td>Status</td>
+                    <td>Remarks</td>
                     <td>
-                        <?php
-                        $due = $membership_data["discount_amount"] - ($membership_data["paid_amount"] + $grand_total);
-                        $paid_amount = ($membership_data["paid_amount"] + $grand_total);
-                        if ($paid_amount >= $membership_data["discount_amount"])
-                            echo 'Fully Paid';
-                        elseif ($paid_amount == 0)
-                            echo 'Not Paid';
-                        else
-                            echo 'Partially Paid';
-                        ?>
-
+                        <?= $income_data["remarks"] ?>
                     </td>
                 </tr>
 
@@ -393,7 +372,7 @@
             }
             ?>
             <tr>
-                <td><?php echo __('Now Total Paid:'); ?></td>
+                <td><?php echo __('Now Paid:'); ?></td>
                 <td><h4
                             style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total; ?></h4>
 
@@ -404,37 +383,16 @@
                         echo $f->format($grand_total);
                         ?> Taka</i></td>
             </tr>
-            <tr>
-                <td>Discounted Membership Amount</td>
-                <td><i>
-                        <?php
-                        echo $membership_data["discount_amount"];
-                        ?> Taka</i></td>
-                <td>Previously Paid</td>
-                <td><i>
-                        <?php
-                        echo $membership_data["paid_amount"];
-                        ?> Taka</i></td>
-            </tr>
+
             <tr>
                 <td>Due Amount</td>
                 <td><i>
                         <?php
-                        echo $membership_data["discount_amount"] - ($membership_data["paid_amount"] + $grand_total);
+                        echo $income_data["due_amount"];
                         ?> Taka</i></td>
-                <td>Status</td>
+                <td>Remarks</td>
                 <td>
-                    <?php
-                    $due = $membership_data["discount_amount"] - ($membership_data["paid_amount"] + $grand_total);
-                    $paid_amount = ($membership_data["paid_amount"] + $grand_total);
-                    if ($paid_amount >= $membership_data["discount_amount"])
-                        echo 'Fully Paid';
-                    elseif ($paid_amount == 0)
-                        echo 'Not Paid';
-                    else
-                        echo 'Partially Paid';
-                    ?>
-
+                    <?= $income_data["remarks"] ?>
                 </td>
             </tr>
             </tbody>

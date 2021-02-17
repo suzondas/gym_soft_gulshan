@@ -267,6 +267,8 @@ class MembershipPaymentController extends AppController
             $row->receiver_id = $session["id"];
             $row->invoice_type = 'income';
             $row->payment_status = $this->request->data['payment_status'];
+            $row->remarks = $this->request->data['remarks'];
+            $row->due_amount = $this->request->data['due_amount'];
             $row->invoice_label = $this->request->data['invoice_label'];
             $row->invoice_date = date("Y-m-d", strtotime($data["invoice_date"]));
             if ($this->MembershipPayment->GymIncomeExpense->save($row)) {

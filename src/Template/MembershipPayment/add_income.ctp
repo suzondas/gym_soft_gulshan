@@ -139,6 +139,26 @@ echo $this->Html->script('select2.min');
                     </div>
                 </div>
                 <hr>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="due_amount"><?php echo __("Due Amount"); ?><span
+                                class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                        <input id="invoice_label"
+                               class="form-control text-input" type="text"
+                               value="<?php echo ($edit) ? $data["due_amount"] : ""; ?>" name="due_amount">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="remarks"><?php echo __("Remarks"); ?><span
+                                class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                        <input id="invoice_label"
+                               class="form-control text-input" type="text"
+                               value="<?php echo ($edit) ? $data["remarks"] : ""; ?>" name="remarks">
+                    </div>
+                </div>
+                <hr>
                 <div class="col-sm-offset-2 col-sm-8">
                     <input type="submit" value="<?php echo __("Create Income Entry"); ?>" name="save_income"
                            class="btn btn-flat btn-success">
