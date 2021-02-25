@@ -149,7 +149,7 @@ return [
      *   breathing room to complete logging or error handling.
      */
     'Error' => [
-        'errorLevel' => E_ALL & ~E_DEPRECATED,
+        'errorLevel' => E_ALL ^ E_DEPRECATED ^ E_USER_DEPRECATED,
         'exceptionRenderer' => 'Cake\Error\ExceptionRenderer',
         'skipLog' => [],
         'log' => true,
@@ -177,24 +177,24 @@ return [
      */
     'EmailTransport' => [
         // 'default' => [
-            // 'className' => 'Mail',
-            // The following keys are used in SMTP transports
-            // 'host' => 'localhost',
-            // 'port' => 25,
-            // 'timeout' => 30,
-            // 'username' => 'user',
-            // 'password' => 'secret',
-            // 'client' => null,
-            // 'tls' => null,
-            // 'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+        // 'className' => 'Mail',
+        // The following keys are used in SMTP transports
+        // 'host' => 'localhost',
+        // 'port' => 25,
+        // 'timeout' => 30,
+        // 'username' => 'user',
+        // 'password' => 'secret',
+        // 'client' => null,
+        // 'tls' => null,
+        // 'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         // ],
-		'default' => [
+        'default' => [
             'host' => 'EMAIL_HOST',
-			'port' => 0,
-			'username' => 'EMAIL_ID',
-			'password' => 'EMAIL_PASS',
-			'className' => 'Smtp',
-			'ssl' => true
+            'port' => 0,
+            'username' => 'EMAIL_ID',
+            'password' => 'EMAIL_PASS',
+            'className' => 'Smtp',
+            'ssl' => true
         ],
     ],
 
@@ -228,9 +228,9 @@ return [
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
             'host' => 'localhost',
-            'username' => 'doorfpbd_doorfpbd',
-            'password' => 'doorfpbd',
-            'database' => 'doorfpbd_gymbd_gulshan2',
+            'username' => 'root',
+            'password' => 'Admin!@#$1234',
+            'database' => 'gymbd_gyms',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],
@@ -239,7 +239,7 @@ return [
             'quoteIdentifiers' => false,
             'url' => env('DATABASE_URL', null),
         ],
-		'install' => [
+        'install' => [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
