@@ -180,7 +180,7 @@
                 }
                 ?>
                 <tr>
-                    <td><?php echo __('Now Paid:'); ?></td>
+                    <td><?php echo __('Total Amount:'); ?></td>
                     <td><h4
                                 style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total; ?></h4>
 
@@ -189,6 +189,18 @@
                     <td><i><?php
                             $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
                             echo $f->format($grand_total);
+                            ?> Taka</i></td>
+                </tr>
+                <tr>
+                    <td><?php echo __('Now Paid:'); ?></td>
+                    <td><h4
+                                style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total - $income_data["due_amount"]; ?></h4>
+
+                    </td>
+                    <td>In Words:</td>
+                    <td><i><?php
+                            $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+                            echo $f->format($grand_total - $income_data["due_amount"]);
                             ?> Taka</i></td>
                 </tr>
 
@@ -372,7 +384,7 @@
             }
             ?>
             <tr>
-                <td><?php echo __('Now Paid:'); ?></td>
+                <td><?php echo __('Total Amount:'); ?></td>
                 <td><h4
                             style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total; ?></h4>
 
@@ -383,7 +395,18 @@
                         echo $f->format($grand_total);
                         ?> Taka</i></td>
             </tr>
+            <tr>
+                <td><?php echo __('Now Paid:'); ?></td>
+                <td><h4
+                            style="padding-bottom:0px;margin-bottom:0px;"><?php echo $this->Gym->get_currency_symbol(); ?><?php echo $grand_total - $income_data["due_amount"]; ?></h4>
 
+                </td>
+                <td>In Words:</td>
+                <td><i><?php
+                        $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+                        echo $f->format($grand_total - $income_data["due_amount"]);
+                        ?> Taka</i></td>
+            </tr>
             <tr>
                 <td>Due Amount</td>
                 <td><i>
