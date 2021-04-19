@@ -241,9 +241,16 @@ class MembershipPaymentController extends AppController
 
     public function incomeList()
     {
-        $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income"])->hydrate(false)->toArray();
+        if($this->Auth->user('role_name') === 'staff_member'){
+            $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income","receiver_id"=>$this->Auth->user('id')])->hydrate(false)->toArray();
 //        var_dump($data);exit;
-        $this->set("data", $data);
+            $this->set("data", $data);
+        }else{
+            $data = $this->MembershipPayment->GymIncomeExpense->find("all")->contain(["GymMember"])->where(["invoice_type" => "income"])->hydrate(false)->toArray();
+//        var_dump($data);exit;
+            $this->set("data", $data);
+        }
+
     }
 
     public function addIncome()
