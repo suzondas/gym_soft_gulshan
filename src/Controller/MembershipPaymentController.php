@@ -486,7 +486,7 @@ class MembershipPaymentController extends AppController
         $role_name = $user["role_name"];
         $curr_action = $this->request->action;
         $members_actions = ["paymentList", "paymentSuccess", "ipnFunction"];
-        $staff_actions = ["paymentList", "addIncome", "addCustomMember", "incomeReport", "incomeList", "expenseList", "addExpense", "incomeEdit", "expenseEdit"];
+        $staff_actions = ["paymentList", "addIncome", "addCustomMember", "incomeReport", "incomeList", "expenseList", "addExpense", "incomeEdit", "expenseEdit","printInvoice"];
         $acc_actions = ["paymentList", "addIncome", "incomeList", "expenseList", "addExpense", "incomeEdit", "expenseEdit", "printInvoice", "deleteIncome"];
         switch ($role_name) {
             CASE "member":
