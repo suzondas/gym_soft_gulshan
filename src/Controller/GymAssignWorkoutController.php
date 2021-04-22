@@ -16,7 +16,7 @@ class GymAssignWorkoutController extends AppController
 		$session = $this->request->session()->read("User");
 		if($session["role_name"] == "staff_member")
 		{
-			if($this->GYMFunction->getSettings("staff_can_view_own_member"))
+			/*if($this->GYMFunction->getSettings("staff_can_view_own_member"))
 			{
 				$data = $this->GymAssignWorkout->find("all")->contain(["GymMember"])->where(["GymMember.assign_staff_mem"=>$session["id"],"member_type"=>"Member"])->select($this->GymAssignWorkout)->group("user_id");
 				$data = $data->select(["GymMember.first_name","GymMember.last_name","GymMember.image","GymMember.member_id","GymMember.intrested_area"])->hydrate(false)->toArray();
@@ -24,7 +24,9 @@ class GymAssignWorkoutController extends AppController
 			else{
 				$data = $this->GymAssignWorkout->find("all")->contain(["GymMember"])->select($this->GymAssignWorkout)->group("user_id");
 				$data = $data->select(["GymMember.first_name","GymMember.last_name","GymMember.image","GymMember.member_id","GymMember.intrested_area"])->hydrate(false)->toArray();
-			}
+			}*/
+            $data = $this->GymAssignWorkout->find("all")->contain(["GymMember"])->select($this->GymAssignWorkout)->group(["user_id","GymAssignWorkout.id"]);
+            $data = $data->select(["GymMember.first_name","GymMember.last_name","GymMember.image","GymMember.member_id","GymMember.intrested_area"])->hydrate(false)->toArray();
 		}
 		else{
 			$data = $this->GymAssignWorkout->find("all")->contain(["GymMember"])->select($this->GymAssignWorkout)->group(["user_id","GymAssignWorkout.id"]);

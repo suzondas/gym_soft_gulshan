@@ -20,13 +20,15 @@ class GymDailyWorkoutController extends AppController
 		}
 		else if($session["role_name"] == "staff_member")
 		{
-			if($this->GYMFunction->getSettings("staff_can_view_own_member"))
+			/*if($this->GYMFunction->getSettings("staff_can_view_own_member"))
 			{			
 				$data = $this->GymDailyWorkout->GymMember->find("all")->where(["role_name"=>"member","assign_staff_mem"=>$session["id"]])->hydrate(false)->toArray();
 			}else{
 				$data = $this->GymDailyWorkout->GymMember->find("all")->where(["role_name"=>"member"])->hydrate(false)->toArray();
-			}
-		}
+			}*/
+            $data = $this->GymDailyWorkout->GymMember->find("all")->where(["role_name"=>"member"])->hydrate(false)->toArray();
+
+        }
 		else if($session["role_name"] == "member")
 		{
 			$uid = $session["id"];
