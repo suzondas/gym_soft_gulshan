@@ -40,7 +40,7 @@ class GymNutritionController extends AppController
 		
 		if($session["role_name"] == "staff_member")
 		{
-			if($this->GYMFunction->getSettings("staff_can_view_own_member"))
+		/*	if($this->GYMFunction->getSettings("staff_can_view_own_member"))
 			{
 				$members = $this->GymNutrition->GymMember->find("list",["keyField"=>"id","valueField"=>"name"])->where(["role_name"=>"member","assign_staff_mem"=>$session["id"]]);
 				$members = $members->select(["id",'name'=>$members->func()->concat(['first_name'=>'literal',' ','last_name'=>'literal'])])->hydrate(false)->toArray();
@@ -48,7 +48,9 @@ class GymNutritionController extends AppController
 			else{
 				$members = $this->GymNutrition->GymMember->find("list",["keyField"=>"id","valueField"=>"name"])->where(["role_name"=>"member"]);
 				$members = $members->select(["id",'name'=>$members->func()->concat(['first_name'=>'literal',' ','last_name'=>'literal'])])->hydrate(false)->toArray();
-			}
+			}*/
+            $members = $this->GymNutrition->GymMember->find("list",["keyField"=>"id","valueField"=>"name"])->where(["role_name"=>"member"]);
+            $members = $members->select(["id",'name'=>$members->func()->concat(['first_name'=>'literal',' ','last_name'=>'literal'])])->hydrate(false)->toArray();
 		}
 		else{
 			$members = $this->GymNutrition->GymMember->find("list",["keyField"=>"id","valueField"=>"name"])->where(["role_name"=>"member"]);

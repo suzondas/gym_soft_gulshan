@@ -35,12 +35,14 @@ Class GymMemberController extends AppController
             }
 
         } else if ($session["role_name"] == "staff_member") {
-            $uid = intval($session["id"]);
+           /* $uid = intval($session["id"]);
             if ($this->GYMFunction->getSettings("staff_can_view_own_member")) {
                 $data = $this->GymMember->find("all")->contain("Membership")->where(["assign_staff_mem" => $uid])->hydrate(false)->toArray();
             } else {
                 $data = $this->GymMember->find("all")->contain("Membership")->where(["role_name" => "member"])->hydrate(false)->toArray();
-            }
+            }*/
+            $data = $this->GymMember->find("all")->contain("Membership")->where(["role_name" => "member"])->hydrate(false)->toArray();
+
         } else {
             $data = $this->GymMember->find("all")->contain("Membership")->where(["role_name" => "member"])->hydrate(false)->toArray();
         }
