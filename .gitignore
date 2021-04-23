@@ -5,3 +5,6 @@ config/app.php
 .idea
 .idea/*
 .idea/
+log
+log/
+log/*

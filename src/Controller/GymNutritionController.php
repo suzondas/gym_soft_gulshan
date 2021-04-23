@@ -261,7 +261,7 @@ class GymNutritionController extends AppController
 
     public function DeleteNutirion($nid)
     {
-        $gym_nutrition_data = TableRegistry::get('gym_nutrition_data');
+      /*  $gym_nutrition_data = TableRegistry::get('gym_nutrition_data');
         $delete_ok = $gym_nutrition_data->deleteAll(["nutrition_id" => $nid]);
         if ($delete_ok) {
             $row = $this->GymNutrition->get($nid);
@@ -269,6 +269,11 @@ class GymNutritionController extends AppController
                 $this->Flash->success(__("Success! Record Deleted Successfully"));
                 return $this->redirect($this->referer());
             }
+        }*/
+        $row = $this->GymNutrition->get($nid);
+        if ($this->GymNutrition->delete($row)) {
+            $this->Flash->success(__("Success! Record Deleted Successfully"));
+            return $this->redirect($this->referer());
         }
     }
 
