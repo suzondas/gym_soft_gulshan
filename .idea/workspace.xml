@@ -7,27 +7,6 @@
     <list default="true" id="78a4d150-6f81-4a23-8815-bd7be8c29605" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1600146791" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1602433454" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1604152892" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1604595747" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1606056592" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1607877088" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1609346429" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1610123102" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1610194226" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/debug.log.1610352378" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610365794" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610365844" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610366302" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610366712" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610368114" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610368164" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610376062" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610379229" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610379235" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/error.log.1610414951" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/GymNutritionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GymNutritionController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +19,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/GymNutritionController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="481">
@@ -118,11 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            <state relative-caret-position="184">
+              <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -209,8 +188,8 @@
         <option value="$PROJECT_DIR$/src/Controller/GymMemberController.php" />
         <option value="$PROJECT_DIR$/src/Controller/GymAssignWorkoutController.php" />
         <option value="$PROJECT_DIR$/src/Controller/GymDailyWorkoutController.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Controller/GymNutritionController.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -283,35 +262,6 @@
             <path>
               <item name="gym_soft_gulshan" type="b2602c69:ProjectViewProjectNode" />
               <item name="gym_soft_gulshan" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gym_soft_gulshan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gym_soft_gulshan" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gym_soft_gulshan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gym_soft_gulshan" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gym_soft_gulshan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gym_soft_gulshan" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gym_soft_gulshan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gym_soft_gulshan" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gym_soft_gulshan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gym_soft_gulshan" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Model" type="462c0819:PsiDirectoryNode" />
-              <item name="Table" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gym_soft_gulshan" type="b2602c69:ProjectViewProjectNode" />
@@ -389,18 +339,18 @@
       <workItem from="1614612481655" duration="1676000" />
       <workItem from="1618065864601" duration="2115000" />
       <workItem from="1618146739211" duration="1247000" />
-      <workItem from="1618842423017" duration="15687000" />
+      <workItem from="1618842423017" duration="15964000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85094000" />
+    <option name="totallyTimeSpent" value="85371000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29727685" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29727685" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -413,7 +363,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.16693944" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.43698853" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="File Transfer" order="12" visible="true" weight="0.20294599" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -697,13 +647,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="6" lean-forward="true" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
@@ -766,6 +709,13 @@
           <folding>
             <element signature="e#32#65#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
         </state>
       </provider>
     </entry>
