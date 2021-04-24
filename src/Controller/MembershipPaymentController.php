@@ -96,9 +96,15 @@ class MembershipPaymentController extends AppController
     public function incomeReport()
     {
         $this->set("edit", false);
-        $members = $this->MembershipPayment->GymMember->find("list", ["keyField" => "id", "valueField" => "name"])->where(["role_name !=" => "member"]);
-        $members = $members->select(["id", "name" => $members->func()->concat(["first_name" => "literal", " ", "last_name" => "literal"])])->hydrate(false)->toArray();
-        $members['all'] = 'All';
+        if($this->Auth->user('role_name') === 'administrator'){
+            $members = $this->MembershipPayment->GymMember->find("list", ["keyField" => "id", "valueField" => "name"])->where(["role_name !=" => "member"]);
+            $members = $members->select(["id", "name" => $members->func()->concat(["first_name" => "literal", " ", "last_name" => "literal"])])->hydrate(false)->toArray();
+            $members['all'] = 'All';
+        }else{
+            $members = $this->MembershipPayment->GymMember->find("list", ["keyField" => "id", "valueField" => "name"])->where(["id" => $this->Auth->user('id')]);
+            $members = $members->select(["id", "name" => $members->func()->concat(["first_name" => "literal", " ", "last_name" => "literal"])])->hydrate(false)->toArray();
+        }
+
         $this->set("members", $members);
 
         if ($this->request->is('post')) {
